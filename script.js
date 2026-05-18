@@ -35,7 +35,8 @@ const observer = new IntersectionObserver(entries => {
 const revealSelectors = [
   '.skill-card', '.tl-item', '.cert-card',
   '.contact-card', '.stat-card', '.about-text',
-  '.badge', '#hero h1', '.hero-desc', '.hero-cta', '.hero-chips'
+  '.badge', '#hero h1', '.hero-desc', '.hero-cta', '.hero-chips',
+  '.portfolio-card'
 ];
 
 document.querySelectorAll(revealSelectors.join(', ')).forEach((el, i) => {
