@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Scopri l'archetipo del tuo brand in 8 domande. Tool gratuito basato sui 12 archetipi di Jung." />
+  <title>Archetipo di Brand — Giuseppe Carrione</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRWP8J1N5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4LRWP8J1N5');
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WVZT8P7N');</script>
+  <!-- End Google Tag Manager -->
+  <style>
+    /* ===== PAGE-SPECIFIC STYLES ===== */
+
+    /* Hero */
+    .tool-hero {
+      position: relative;
+      padding: 9rem 0 5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .tool-hero .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.35;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
+    }
+
+    .tool-hero .container { position: relative; z-index: 1; }
+
+    .tool-hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .tool-hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .categories-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .cat-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== QUIZ SECTION ===== */
+    .quiz-section {
+      background: var(--bg-alt);
+      padding: 4rem 0 6rem;
+    }
+
+    .quiz-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Progress */
+    .quiz-progress {
+      margin-bottom: 2.5rem;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+    }
+
+    .progress-phase {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .progress-count {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .progress-track {
+      height: 3px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Stage badge */
+    .stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(230, 57, 70, 0.08);
+      border: 1px solid rgba(230, 57, 70, 0.25);
+      color: var(--accent);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.75rem;
+    }
+
+    .stage-dot {
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 50%;
+    }
+
+    /* Question */
+    .q-container {
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .q-container.fading {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    .q-text {
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.45;
+      margin-bottom: 2rem;
+    }
+
+    /* Options */
+    .options-grid {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .options-grid.two-col { grid-template-columns: 1fr 1fr; }
+    .options-grid.one-col { grid-template-columns: 1fr; }
+
+    .opt-btn {
+      display: block;
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .opt-btn:hover {
+      border-color: rgba(230, 57, 70, 0.5);
+      background: rgba(230, 57, 70, 0.04);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .opt-btn.selected {
+      border-color: var(--accent);
+      background: rgba(230, 57, 70, 0.08);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 0.65rem;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .opt-btn:hover .opt-letter,
+    .opt-btn.selected .opt-letter {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .opt-text {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .opt-btn:hover .opt-text,
+    .opt-btn.selected .opt-text {
+      color: var(--text);
+    }
+
+    /* ===== RESULT SECTION ===== */
+    .result-section {
+      display: none;
+      background: var(--bg);
+      padding: 0 0 6rem;
+    }
+
+    .result-section.visible { display: block; }
+
+    .result-hero {
+      text-align: center;
+      padding: 5rem 2rem 3.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .result-cat-chip {
+      display: inline-block;
+      background: rgba(230, 57, 70, 0.1);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      color: var(--accent);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.2rem;
+    }
+
+    .result-name {
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .result-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* Detail grid */
+    .result-grid {
+      max-width: 880px;
+      margin: 0 auto 1.25rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .result-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .result-card-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .result-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .result-card li {
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.55;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .result-card li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+      top: 0.07em;
+    }
+
+    .result-tone-wrap {
+      max-width: 880px;
+      margin: 0 auto 1.25rem;
+      padding: 0 2rem;
+    }
+
+    .result-tone-text {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.85;
+    }
+
+    /* Examples */
+    .result-examples-wrap {
+      max-width: 880px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+    }
+
+    .examples-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .examples-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .example-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    /* Actions */
+    .result-actions {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Runner-up */
+    .runner-up-wrap {
+      max-width: 880px;
+      margin: 2rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .runner-up-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+
+    .runner-up-icon {
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .runner-up-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .runner-up-name { color: var(--text); font-weight: 600; }
+
+    /* Divider */
+    .result-divider {
+      max-width: 880px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+    }
+
+    .result-divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .options-grid.two-col { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr; }
+      .tool-hero { padding: 8rem 0 4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .quiz-wrapper { padding: 0 1.25rem; }
+      .result-grid,
+      .result-tone-wrap,
+      .result-examples-wrap,
+      .result-actions,
+      .runner-up-wrap,
+      .result-divider { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVZT8P7N"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">GC</a>
+      <ul class="nav-links">
+        <li><a href="index.html">← Sito principale</a></li>
+        <li><a href="index.html#about">Su di me</a></li>
+        <li><a href="index.html#portfolio">Portfolio</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Contattami</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="index.html">← Sito principale</a></li>
+      <li><a href="index.html#about">Su di me</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+      <li><a href="index.html#contact">Contattami</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <header class="tool-hero">
+    <div class="hero-bg-grid"></div>
+    <div class="container">
+      <span class="badge">Tool Gratuito</span>
+      <h1>Scopri il tuo<br /><span class="accent">Archetipo di Brand</span></h1>
+      <p class="tool-hero-desc">
+        8 domande per identificare la personalità del tuo brand tra i 12 archetipi di Jung.
+        Scopri come comunicare con più autenticità ed efficacia.
+      </p>
+      <div class="categories-row">
+        <span class="cat-pill">STABILITÀ</span>
+        <span class="cat-pill">INDIPENDENZA</span>
+        <span class="cat-pill">CAMBIAMENTO</span>
+        <span class="cat-pill">APPARTENENZA</span>
+      </div>
+      <a href="#quiz" class="btn btn-primary">Inizia il quiz →</a>
+    </div>
+  </header>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="quiz-section" id="quiz">
+    <div class="quiz-wrapper">
+
+      <!-- Progress bar -->
+      <div class="quiz-progress">
+        <div class="progress-meta">
+          <span class="progress-phase" id="js-phase-label">Fase 1 · Orientamento</span>
+          <span class="progress-count" id="js-count">1 / 8</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="js-bar" style="width:12.5%"></div>
+        </div>
+      </div>
+
+      <!-- Stage badge -->
+      <div class="stage-badge" id="js-badge">
+        <span class="stage-dot"></span>
+        <span id="js-badge-text">Identifica il tuo orientamento</span>
+      </div>
+
+      <!-- Question + options -->
+      <div class="q-container" id="js-q-container">
+        <h2 class="q-text" id="js-q-text"></h2>
+        <div class="options-grid" id="js-options"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== RESULT ===== -->
+  <section class="result-section" id="js-result">
+
+    <div class="result-hero">
+      <span class="result-cat-chip" id="js-r-cat"></span>
+      <h2 class="result-name"><span class="accent" id="js-r-name"></span></h2>
+      <p class="result-desc" id="js-r-desc"></p>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-card">
+        <div class="result-card-label">Punti di forza</div>
+        <ul id="js-r-strengths"></ul>
+      </div>
+      <div class="result-card">
+        <div class="result-card-label">Obiettivi</div>
+        <ul id="js-r-goals"></ul>
+      </div>
+    </div>
+
+    <div class="result-tone-wrap">
+      <div class="result-card">
+        <div class="result-card-label">Tone of voice &amp; Brand personality</div>
+        <p class="result-tone-text" id="js-r-tone"></p>
+      </div>
+    </div>
+
+    <div class="result-examples-wrap">
+      <div class="examples-label">Brand simili</div>
+      <div class="examples-row" id="js-r-examples"></div>
+    </div>
+
+    <div class="result-divider"><hr /></div>
+
+    <div class="result-actions">
+      <button class="btn btn-primary" id="js-restart">Rifai il quiz</button>
+      <a href="index.html" class="btn btn-outline">← Torna al sito</a>
+    </div>
+
+    <div class="runner-up-wrap" id="js-runnerup-wrap" style="display:none">
+      <div class="runner-up-card">
+        <svg class="runner-up-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <p class="runner-up-text">
+          Hai anche tratti significativi dell'archetipo
+          <span class="runner-up-name" id="js-runnerup-name"></span>
+          — potrebbe essere il tuo secondo archetipo di riferimento.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2026 Giuseppe Carrione · Tutti i diritti riservati</p>
+  </footer>
+
+  <script>
+    /* =============================================
+       DATA
+    ============================================= */
+    const ARCHETYPES = {
+      'Angelo Custode': {
+        category: 'STABILITÀ',
+        description: 'L\'Angelo Custode si preoccupa per gli altri e fa della cura delle persone la propria ragione di esistere. È il brand che ispira fiducia e protezione, presente nel mondo della salute, della cura della persona o del sociale.',
+        strengths: ['Empatia', 'Ascolto attivo', 'Sicurezza', 'Protezione'],
+        goals: ['Prendersi cura degli altri', 'Creare e alimentare fiducia', 'Impegno sociale concreto'],
+        tone: 'Parla in modo empatico cercando di vedere le cose dal punto di vista del cliente. Ascolta costantemente i feedback delle persone e si inserisce nel loro contesto di vita quotidiano per aiutarle nel concreto.',
+        examples: ['P&G', 'Unilever', 'Volvo'],
+      },
+      'Sovrano': {
+        category: 'STABILITÀ',
+        description: 'Il Sovrano si posiziona come leader indiscusso nel proprio settore. Autorevolezza, prestigio e qualità superiore sono i suoi pilastri. Un brand che non chiede fiducia: la comanda.',
+        strengths: ['Forte personalità', 'Autorevolezza', 'Seduzione'],
+        goals: ['Creare prestigio', 'Offrire eccellenza', 'Costruire qualcosa che duri nel tempo'],
+        tone: 'Tono fortemente autoritario, capace di guidare chi sceglie di seguirlo. Il desiderio più grande è il controllo e il riconoscimento come punto di riferimento assoluto. Brand che assumono toni di leadership.',
+        examples: ['Rolex', 'Ralph Lauren', 'Mercedes-Benz'],
+      },
+      'Creatore': {
+        category: 'STABILITÀ',
+        description: 'Il Creatore vuole innovare. Anticonformista per natura, ha come obiettivo costruire un mondo secondo la propria attitudine creativa. Vende prodotti o servizi che permettono alle persone di esprimere il loro pieno potenziale.',
+        strengths: ['Creatività', 'Innovazione', 'Potere dell\'immaginazione'],
+        goals: ['Innovare e creare qualcosa di nuovo', 'Dare alle persone la facoltà di esprimere sé stesse'],
+        tone: 'Visionario e guidato dalla visione del futuro. Ispira attraverso la creatività e dà alle persone gli strumenti per realizzare la propria idea del mondo. Guida chi intende seguirlo verso nuove possibilità.',
+        examples: ['Apple', 'LEGO', 'Adobe'],
+      },
+      'Innocente': {
+        category: 'INDIPENDENZA',
+        description: 'L\'Innocente vede il bene in tutto ciò che lo circonda e cerca di trasmetterlo all\'esterno. Fa sentire i propri consumatori salvi e belli. È il brand della semplicità autentica e della positività genuina.',
+        strengths: ['Semplicità', 'Onestà', 'Integrità', 'Nostalgia'],
+        goals: ['Infondere felicità', 'Vedere e comunicare il bene in ogni cosa'],
+        tone: 'Comunicazione genuina, trasparente e autentica. Infonde positività in modo veritiero, senza artifici. La sua forza è nell\'autenticità che traspare naturalmente da ogni contenuto.',
+        examples: ['Dove', 'Aveeno', 'Warner Bros.'],
+      },
+      'Saggio': {
+        category: 'INDIPENDENZA',
+        description: 'Il Saggio vuole capire il mondo circostante. Sempre alla ricerca della verità, condivide conoscenza e aggiorna il suo pubblico. Può essere una testata giornalistica, una piattaforma educativa o un brand di consulenza.',
+        strengths: ['Conoscenza', 'Cultura', 'Sapienza'],
+        goals: ['Ricercare la verità attraverso conoscenza ed esperienza', 'Promuovere la comprensione del mondo'],
+        tone: 'Animo aperto e sempre disposto a capire il prossimo. Profonda conoscenza del mondo che cerca di trasmettere all\'esterno in modo accessibile a tutti. Aiuta chi si interfaccia ai loro prodotti e servizi.',
+        examples: ['Google', 'Wikipedia', 'Harvard Business Review'],
+      },
+      'Esploratore': {
+        category: 'INDIPENDENZA',
+        description: 'L\'Esploratore vuole viaggiare e vivere quante più esperienze possibili. Offre prodotti legati allo sport, al viaggio e all\'avventura. Il suo messaggio: il mondo è là fuori, esplora.',
+        strengths: ['Indipendenza', 'Anticonformismo', 'Libertà'],
+        goals: ['Scoprire e conoscere sé stessi', 'Viaggiare ed esplorare il mondo'],
+        tone: 'Dà libero sfogo all\'immaginazione delle persone. Parla di luoghi magici e lontani che danno la sensazione di poter avere una via di fuga. Ispira la libertà di muoversi e scoprire nuovi orizzonti.',
+        examples: ['National Geographic', 'Patagonia', 'The North Face'],
+      },
+      'Eroe': {
+        category: 'CAMBIAMENTO',
+        description: 'L\'Eroe è coraggioso, trasuda forza e potenza, crea innovazione e ha un forte impatto sul mondo. È legato allo sport o a prodotti che infondono energia e motivazione. Il suo motto: non arrendersi mai.',
+        strengths: ['Coraggio', 'Forza', 'Intraprendenza'],
+        goals: ['Sfidare la realtà circostante', 'Ispirare il prossimo', 'Cercare un impatto nel mondo'],
+        tone: 'Tono super dinamico e motivazionale. Combatte l\'ingiustizia e porta con sé i consumatori che hanno il coraggio di rischiare. Elimina la paura di esprimere a pieno sé stessi.',
+        examples: ['Nike', 'Duracell', 'Red Bull'],
+      },
+      'Mago': {
+        category: 'CAMBIAMENTO',
+        description: 'Il Mago promette di realizzare qualsiasi sogno. Brand tecnologici che offrono innovazione, trasformazione e soluzioni che cambiano la vita. Rende possibile l\'impossibile.',
+        strengths: ['Visionarietà', 'Cambiamento', 'Innovazione'],
+        goals: ['Realizzare i sogni', 'Offrire tecnologie che facilitano la vita', 'Rivoluzionare il mondo circostante'],
+        tone: 'Trasforma i sogni in realtà e rende possibile l\'impossibile. Spesso parla al condizionale oppure racconta storie di trasformazione. Il futuro è adesso.',
+        examples: ['Dyson', 'Mastercard', 'Disney+'],
+      },
+      'Ribelle': {
+        category: 'CAMBIAMENTO',
+        description: 'Il Ribelle ama infrangere le regole. È anticonformista, non gli importa del giudizio altrui ed è temuto e ammirato allo stesso tempo. Vuole rivoluzionare ciò che non funziona.',
+        strengths: ['Anticonformismo', 'Irriverenza', 'Indifferenza al giudizio altrui'],
+        goals: ['Rivoluzionare quello che non funziona', 'Difendere i valori minacciati'],
+        tone: 'Si rivolge a un pubblico outsider che non ama stare alle regole. Comunicazione forte, a tratti aggressiva. Non ha paura di usare un linguaggio provocatorio perché conosce il suo pubblico.',
+        examples: ['Harley-Davidson', 'Diesel', 'Tesla'],
+      },
+      'Amante': {
+        category: 'APPARTENENZA',
+        description: 'L\'Amante è sensuale e affascinante. I brand che condividono questo archetipo sono romantici, lussuosi e di alta qualità. Ti fanno sentire più bello e desiderato.',
+        strengths: ['Seduzione', 'Fascino', 'Capacità di ammaliare'],
+        goals: ['Creare relazioni intime', 'Supportare il romanticismo e l\'estetica', 'Mettere al centro il bello'],
+        tone: 'Seduce il consumatore con le parole giuste, convincendolo che il brand sia esattamente ciò che fa per lui. Grande motivatore: usa le parole per far sentire le persone più belle e desiderate.',
+        examples: ['Dior', 'Ferrero Rocher', 'Müller'],
+      },
+      'Burlone': {
+        category: 'APPARTENENZA',
+        description: 'Il Burlone esprime energia e divertimento. Irriverenza e spontaneità sono il suo marchio di fabbrica. Il suo unico obiettivo è divertirsi — e far divertire chi lo segue.',
+        strengths: ['Divertimento', 'Simpatia', 'Spirito sovversivo'],
+        goals: ['Creare leggerezza e un senso di appartenenza', 'Far vedere il mondo in modo divertente'],
+        tone: 'Linguaggio e tono giocherellone, divertente e simpatico. Vuole che anche i propri clienti si godano la vita così come fa il brand. La risata è il miglior punto di contatto.',
+        examples: ["McDonald's", 'M&Ms', 'Fanta'],
+      },
+      'Uomo Comune': {
+        category: 'APPARTENENZA',
+        description: 'L\'Uomo Comune rappresenta tutti noi. Racconta sé stesso e i propri prodotti inserendoli nella vita di tutti i giorni. È perfettamente ok essere normali — e questo lo rende straordinario.',
+        strengths: ['Appartenenza', 'Semplicità', 'Quotidianità'],
+        goals: ['Creare un senso di appartenenza e di gruppo', 'Permettere a tutti di accedere ai propri prodotti'],
+        tone: 'Comunicazione trasparente, semplice e convenzionale. Elimina qualsiasi gap tra brand e persone. Le persone si identificano nel suo modo di comunicare, fare, vivere e vedere le cose.',
+        examples: ['IKEA', 'Fiat', "McDonald's"],
+      },
+    };
+
+    /* =============================================
+       QUIZ QUESTIONS
+    ============================================= */
+    const PHASE1 = [
+      {
+        text: 'Qual è la promessa principale del tuo brand?',
+        options: [
+          { text: '"Ci prendiamo cura di te, sei al sicuro con noi"', cat: 'STABILITÀ' },
+          { text: '"Ti aiutiamo a essere libero, consapevole e indipendente"', cat: 'INDIPENDENZA' },
+          { text: '"Insieme possiamo cambiare il mondo"', cat: 'CAMBIAMENTO' },
+          { text: '"Qui trovi la tua tribù, sei parte di qualcosa"', cat: 'APPARTENENZA' },
+        ],
+      },
+      {
+        text: 'Come si sente il tuo cliente ideale dopo aver scelto il tuo brand?',
+        options: [
+          { text: 'Al sicuro, in buone mani, protetto', cat: 'STABILITÀ' },
+          { text: 'Libero, consapevole, capace di fare di più', cat: 'INDIPENDENZA' },
+          { text: 'Ispirato, motivato, pronto a fare la differenza', cat: 'CAMBIAMENTO' },
+          { text: 'Connesso agli altri, parte di un gruppo, capito', cat: 'APPARTENENZA' },
+        ],
+      },
+      {
+        text: 'Quale aggettivo descrive meglio il tuo brand?',
+        options: [
+          { text: 'Affidabile — sei il punto fermo su cui contare', cat: 'STABILITÀ' },
+          { text: 'Autentico — sei trasparente e genuino', cat: 'INDIPENDENZA' },
+          { text: 'Coraggioso — non hai paura di sfidare lo status quo', cat: 'CAMBIAMENTO' },
+          { text: 'Inclusivo — tutti si sentono i benvenuti con te', cat: 'APPARTENENZA' },
+        ],
+      },
+      {
+        text: 'Il tuo prodotto o servizio aiuta le persone a...',
+        options: [
+          { text: 'Risolvere un problema concreto e migliorare la vita quotidiana', cat: 'STABILITÀ' },
+          { text: 'Scoprire qualcosa di nuovo, crescere o esprimersi liberamente', cat: 'INDIPENDENZA' },
+          { text: 'Superare un ostacolo, sfidare i propri limiti o cambiare rotta', cat: 'CAMBIAMENTO' },
+          { text: 'Stare insieme, divertirsi e sentirsi parte di un gruppo', cat: 'APPARTENENZA' },
+        ],
+      },
+      {
+        text: 'Come parla il tuo brand?',
+        options: [
+          { text: 'Con empatia e rassicurazione — metti le persone a proprio agio', cat: 'STABILITÀ' },
+          { text: 'Con onestà e curiosità — sei aperto e diretto', cat: 'INDIPENDENZA' },
+          { text: 'Con forza e determinazione — non temi il confronto', cat: 'CAMBIAMENTO' },
+          { text: 'Con calore e spontaneità — sei vicino alle persone', cat: 'APPARTENENZA' },
+        ],
+      },
+    ];
+
+    const PHASE2 = {
+      'STABILITÀ': [
+        {
+          text: 'Cosa vuoi che le persone associno principalmente al tuo brand?',
+          options: [
+            { text: 'Cura, protezione e fiducia — sei al fianco delle persone', arch: 'Angelo Custode' },
+            { text: 'Leadership, eccellenza e prestigio — sei il migliore nel settore', arch: 'Sovrano' },
+            { text: 'Creatività, innovazione e libertà espressiva', arch: 'Creatore' },
+          ],
+        },
+        {
+          text: 'Qual è il tuo obiettivo principale?',
+          options: [
+            { text: 'Aiutare gli altri e fare del bene concreto nella loro vita', arch: 'Angelo Custode' },
+            { text: 'Essere il punto di riferimento assoluto nel tuo settore', arch: 'Sovrano' },
+            { text: 'Creare qualcosa che non esisteva prima', arch: 'Creatore' },
+          ],
+        },
+        {
+          text: 'Quale tipo di brand ti ispira di più?',
+          options: [
+            { text: 'P&G, Volvo, Unilever — cura e protezione delle persone', arch: 'Angelo Custode' },
+            { text: 'Rolex, Mercedes-Benz, Ralph Lauren — eccellenza e autorità', arch: 'Sovrano' },
+            { text: 'Apple, LEGO, Adobe — creatività e innovazione', arch: 'Creatore' },
+          ],
+        },
+      ],
+      'INDIPENDENZA': [
+        {
+          text: 'Cosa offre principalmente il tuo brand?',
+          options: [
+            { text: 'Un\'esperienza positiva, semplice e autentica', arch: 'Innocente' },
+            { text: 'Conoscenza e strumenti per capire meglio il mondo', arch: 'Saggio' },
+            { text: 'Libertà, avventura e la scoperta di nuovi orizzonti', arch: 'Esploratore' },
+          ],
+        },
+        {
+          text: 'Qual è il valore che ti distingue di più?',
+          options: [
+            { text: 'Semplicità, onestà e ottimismo genuino', arch: 'Innocente' },
+            { text: 'Conoscenza, cultura e condivisione del sapere', arch: 'Saggio' },
+            { text: 'Indipendenza, anticonformismo e libertà di scelta', arch: 'Esploratore' },
+          ],
+        },
+        {
+          text: 'Quale tipo di brand ti ispira di più?',
+          options: [
+            { text: 'Dove, Aveeno — bellezza semplice e autentica', arch: 'Innocente' },
+            { text: 'Google, Wikipedia — conoscenza accessibile a tutti', arch: 'Saggio' },
+            { text: 'National Geographic, Patagonia, The North Face — esplorazione', arch: 'Esploratore' },
+          ],
+        },
+      ],
+      'CAMBIAMENTO': [
+        {
+          text: 'Come agisce il tuo brand nel mondo?',
+          options: [
+            { text: 'Infrange le regole e sfida i sistemi che non funzionano', arch: 'Ribelle' },
+            { text: 'Trasforma i sogni in realtà attraverso tecnologia e visione', arch: 'Mago' },
+            { text: 'Ispira con coraggio e motiva le persone a superare i propri limiti', arch: 'Eroe' },
+          ],
+        },
+        {
+          text: 'Qual è il tuo obiettivo principale?',
+          options: [
+            { text: 'Rivoluzionare uno status quo che non ritieni giusto', arch: 'Ribelle' },
+            { text: 'Rendere possibile l\'impossibile e aprire nuovi mondi', arch: 'Mago' },
+            { text: 'Aiutare le persone a diventare la versione migliore di sé', arch: 'Eroe' },
+          ],
+        },
+        {
+          text: 'Quale tipo di brand ti ispira di più?',
+          options: [
+            { text: 'Harley-Davidson, Diesel, Tesla — rompono le convenzioni', arch: 'Ribelle' },
+            { text: 'Dyson, Mastercard, Disney+ — magia e tecnologia', arch: 'Mago' },
+            { text: 'Nike, Red Bull, Duracell — forza e coraggio', arch: 'Eroe' },
+          ],
+        },
+      ],
+      'APPARTENENZA': [
+        {
+          text: 'Qual è il cuore della tua comunicazione?',
+          options: [
+            { text: 'Seduzione, romanticismo e desiderio — fai sentire le persone belle', arch: 'Amante' },
+            { text: 'Ironia, leggerezza e divertimento — fai sorridere ogni giorno', arch: 'Burlone' },
+            { text: 'Quotidianità, accessibilità e autenticità — sei uno di loro', arch: 'Uomo Comune' },
+          ],
+        },
+        {
+          text: 'Come vuoi che il cliente si senta scegliendo te?',
+          options: [
+            { text: 'Desiderato, bello, speciale — ha scelto qualcosa di esclusivo', arch: 'Amante' },
+            { text: 'Allegro, spensierato, in buona compagnia', arch: 'Burlone' },
+            { text: 'Capito, normale, parte del gruppo — va bene così com\'è', arch: 'Uomo Comune' },
+          ],
+        },
+        {
+          text: 'Quale tipo di brand ti ispira di più?',
+          options: [
+            { text: 'Dior, Ferrero Rocher — estetica, piacere e lusso', arch: 'Amante' },
+            { text: "McDonald's, M&Ms, Fanta — leggerezza e divertimento", arch: 'Burlone' },
+            { text: 'IKEA, Fiat — semplicità e concretezza per tutti', arch: 'Uomo Comune' },
+          ],
+        },
+      ],
+    };
+
+    /* =============================================
+       STATE
+    ============================================= */
+    let phase = 1;
+    let qIndex = 0;
+    let catScores = { 'STABILITÀ': 0, 'INDIPENDENZA': 0, 'CAMBIAMENTO': 0, 'APPARTENENZA': 0 };
+    let archScores = {};
+    let winCat = null;
+
+    const TOTAL_Q = 8; // 5 + 3
+
+    /* =============================================
+       DOM REFS
+    ============================================= */
+    const elPhaseLabel = document.getElementById('js-phase-label');
+    const elCount      = document.getElementById('js-count');
+    const elBar        = document.getElementById('js-bar');
+    const elBadgeText  = document.getElementById('js-badge-text');
+    const elQContainer = document.getElementById('js-q-container');
+    const elQText      = document.getElementById('js-q-text');
+    const elOptions    = document.getElementById('js-options');
+    const elQuizSec    = document.getElementById('quiz');
+    const elResultSec  = document.getElementById('js-result');
+
+    /* =============================================
+       HELPERS
+    ============================================= */
+    function winner(scores) {
+      return Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+    }
+
+    function runnerUp(scores) {
+      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      return sorted.length > 1 && sorted[1][1] > 0 ? sorted[1][0] : null;
+    }
+
+    function globalStep() {
+      return phase === 1 ? qIndex + 1 : 5 + qIndex + 1;
+    }
+
+    function currentQuestions() {
+      return phase === 1 ? PHASE1 : PHASE2[winCat];
+    }
+
+    /* =============================================
+       RENDER
+    ============================================= */
+    function renderQuestion() {
+      const questions = currentQuestions();
+      const q = questions[qIndex];
+      const step = globalStep();
+
+      // Progress
+      elBar.style.width = `${(step / TOTAL_Q) * 100}%`;
+      elCount.textContent = `${step} / ${TOTAL_Q}`;
+
+      if (phase === 1) {
+        elPhaseLabel.textContent = 'Fase 1 · Orientamento';
+        elBadgeText.textContent  = 'Identifica il tuo orientamento';
+      } else {
+        elPhaseLabel.textContent = `Fase 2 · ${winCat}`;
+        elBadgeText.textContent  = `Approfondisci: ${winCat}`;
+      }
+
+      elQText.textContent = q.text;
+
+      elOptions.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      elOptions.className = `options-grid ${q.options.length === 4 ? 'two-col' : 'one-col'}`;
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'opt-btn';
+        btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span class="opt-text">${opt.text}</span>`;
+        btn.addEventListener('click', () => onAnswer(opt, btn));
+        elOptions.appendChild(btn);
+      });
+    }
+
+    /* =============================================
+       ANSWER HANDLER
+    ============================================= */
+    function onAnswer(opt, btn) {
+      elOptions.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      // Disable all buttons while animating
+      elOptions.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+
+      if (phase === 1) {
+        catScores[opt.cat]++;
+      } else {
+        archScores[opt.arch] = (archScores[opt.arch] || 0) + 1;
+      }
+
+      setTimeout(advance, 380);
+    }
+
+    /* =============================================
+       ADVANCE
+    ============================================= */
+    function advance() {
+      elQContainer.classList.add('fading');
+
+      setTimeout(() => {
+        const questions = currentQuestions();
+
+        if (qIndex < questions.length - 1) {
+          qIndex++;
+          renderQuestion();
+        } else if (phase === 1) {
+          winCat = winner(catScores);
+          archScores = {};
+          phase = 2;
+          qIndex = 0;
+          renderQuestion();
+        } else {
+          showResult();
+          return;
+        }
+
+        elQContainer.classList.remove('fading');
+      }, 220);
+    }
+
+    /* =============================================
+       RESULT
+    ============================================= */
+    function showResult() {
+      const archName = winner(archScores);
+      const second   = runnerUp(archScores);
+      const data     = ARCHETYPES[archName];
+
+      elQuizSec.style.display = 'none';
+      elResultSec.classList.add('visible');
+
+      document.getElementById('js-r-cat').textContent  = data.category;
+      document.getElementById('js-r-name').textContent = archName;
+      document.getElementById('js-r-desc').textContent = data.description;
+      document.getElementById('js-r-tone').textContent = data.tone;
+
+      document.getElementById('js-r-strengths').innerHTML =
+        data.strengths.map(s => `<li>${s}</li>`).join('');
+
+      document.getElementById('js-r-goals').innerHTML =
+        data.goals.map(g => `<li>${g}</li>`).join('');
+
+      document.getElementById('js-r-examples').innerHTML =
+        data.examples.map(e => `<span class="example-chip">${e}</span>`).join('');
+
+      const runnerUpWrap = document.getElementById('js-runnerup-wrap');
+      if (second) {
+        document.getElementById('js-runnerup-name').textContent = second;
+        runnerUpWrap.style.display = 'block';
+      } else {
+        runnerUpWrap.style.display = 'none';
+      }
+
+      elResultSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* =============================================
+       RESTART
+    ============================================= */
+    function restart() {
+      phase = 1;
+      qIndex = 0;
+      catScores = { 'STABILITÀ': 0, 'INDIPENDENZA': 0, 'CAMBIAMENTO': 0, 'APPARTENENZA': 0 };
+      archScores = {};
+      winCat = null;
+
+      elResultSec.classList.remove('visible');
+      elQContainer.classList.remove('fading');
+      elQuizSec.style.display = '';
+
+      renderQuestion();
+      elQuizSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('js-restart').addEventListener('click', restart);
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* =============================================
+       INIT
+    ============================================= */
+    renderQuestion();
+  </script>
+</body>
+</html>
