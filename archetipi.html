@@ -441,6 +441,47 @@
       border-top: 1px solid var(--border);
     }
 
+    /* Palette */
+    .result-palette-wrap {
+      max-width: 880px;
+      margin: 0 auto 1.25rem;
+      padding: 0 2rem;
+    }
+
+    .palette-swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .swatch-color {
+      height: 60px;
+      border-radius: 8px;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .swatch-hex {
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .swatch-name {
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 640px) {
       .options-grid.two-col { grid-template-columns: 1fr; }
@@ -452,10 +493,14 @@
       .quiz-wrapper { padding: 0 1.25rem; }
       .result-grid,
       .result-tone-wrap,
+      .result-palette-wrap,
       .result-examples-wrap,
       .result-actions,
       .runner-up-wrap,
       .result-divider { padding: 0 1.25rem; }
+      .swatch-color { height: 44px; }
+      .swatch-hex { font-size: 0.62rem; }
+      .swatch-name { font-size: 0.6rem; }
     }
   </style>
 </head>
@@ -567,6 +612,13 @@
       </div>
     </div>
 
+    <div class="result-palette-wrap">
+      <div class="result-card">
+        <div class="result-card-label">Palette colori suggerita</div>
+        <div class="palette-swatches" id="js-r-palette"></div>
+      </div>
+    </div>
+
     <div class="result-examples-wrap">
       <div class="examples-label">Brand simili</div>
       <div class="examples-row" id="js-r-examples"></div>
@@ -611,6 +663,13 @@
         goals: ['Prendersi cura degli altri', 'Creare e alimentare fiducia', 'Impegno sociale concreto'],
         tone: 'Parla in modo empatico cercando di vedere le cose dal punto di vista del cliente. Ascolta costantemente i feedback delle persone e si inserisce nel loro contesto di vita quotidiano per aiutarle nel concreto.',
         examples: ['P&G', 'Unilever', 'Volvo'],
+        palette: [
+          { hex: '#4A90D9', name: 'Azzurro fiducia' },
+          { hex: '#6BC4A0', name: 'Verde cura' },
+          { hex: '#1D4E8F', name: 'Blu protezione' },
+          { hex: '#F5F0E8', name: 'Avorio caldo' },
+          { hex: '#D4EAF7', name: 'Celeste delicato' },
+        ],
       },
       'Sovrano': {
         category: 'STABILITÀ',
@@ -619,6 +678,13 @@
         goals: ['Creare prestigio', 'Offrire eccellenza', 'Costruire qualcosa che duri nel tempo'],
         tone: 'Tono fortemente autoritario, capace di guidare chi sceglie di seguirlo. Il desiderio più grande è il controllo e il riconoscimento come punto di riferimento assoluto. Brand che assumono toni di leadership.',
         examples: ['Rolex', 'Ralph Lauren', 'Mercedes-Benz'],
+        palette: [
+          { hex: '#0D1B2A', name: 'Blu notte' },
+          { hex: '#C9A84C', name: 'Oro imperiale' },
+          { hex: '#7D1A1A', name: 'Borgogna' },
+          { hex: '#F2ECD8', name: 'Avorio' },
+          { hex: '#3C3C3C', name: 'Grafite' },
+        ],
       },
       'Creatore': {
         category: 'STABILITÀ',
@@ -627,6 +693,13 @@
         goals: ['Innovare e creare qualcosa di nuovo', 'Dare alle persone la facoltà di esprimere sé stesse'],
         tone: 'Visionario e guidato dalla visione del futuro. Ispira attraverso la creatività e dà alle persone gli strumenti per realizzare la propria idea del mondo. Guida chi intende seguirlo verso nuove possibilità.',
         examples: ['Apple', 'LEGO', 'Adobe'],
+        palette: [
+          { hex: '#E84A4A', name: 'Rosso creativo' },
+          { hex: '#6929C4', name: 'Viola ispirazione' },
+          { hex: '#00B4D8', name: 'Turchese' },
+          { hex: '#FFB703', name: 'Giallo caldo' },
+          { hex: '#1A1A1A', name: 'Nero' },
+        ],
       },
       'Innocente': {
         category: 'INDIPENDENZA',
@@ -635,6 +708,13 @@
         goals: ['Infondere felicità', 'Vedere e comunicare il bene in ogni cosa'],
         tone: 'Comunicazione genuina, trasparente e autentica. Infonde positività in modo veritiero, senza artifici. La sua forza è nell\'autenticità che traspare naturalmente da ogni contenuto.',
         examples: ['Dove', 'Aveeno', 'Warner Bros.'],
+        palette: [
+          { hex: '#FFF3CD', name: 'Crema solare' },
+          { hex: '#FADADD', name: 'Rosa tenero' },
+          { hex: '#C8EAC8', name: 'Verde menta' },
+          { hex: '#AEE0F5', name: 'Celeste' },
+          { hex: '#6B8F71', name: 'Verde naturale' },
+        ],
       },
       'Saggio': {
         category: 'INDIPENDENZA',
@@ -643,6 +723,13 @@
         goals: ['Ricercare la verità attraverso conoscenza ed esperienza', 'Promuovere la comprensione del mondo'],
         tone: 'Animo aperto e sempre disposto a capire il prossimo. Profonda conoscenza del mondo che cerca di trasmettere all\'esterno in modo accessibile a tutti. Aiuta chi si interfaccia ai loro prodotti e servizi.',
         examples: ['Google', 'Wikipedia', 'Harvard Business Review'],
+        palette: [
+          { hex: '#1A3A6C', name: 'Blu sapienza' },
+          { hex: '#4558A8', name: 'Indaco' },
+          { hex: '#8FA3B1', name: 'Grigio acciaio' },
+          { hex: '#F5F2EB', name: 'Carta antica' },
+          { hex: '#2E3A4E', name: 'Inchiostro' },
+        ],
       },
       'Esploratore': {
         category: 'INDIPENDENZA',
@@ -651,6 +738,13 @@
         goals: ['Scoprire e conoscere sé stessi', 'Viaggiare ed esplorare il mondo'],
         tone: 'Dà libero sfogo all\'immaginazione delle persone. Parla di luoghi magici e lontani che danno la sensazione di poter avere una via di fuga. Ispira la libertà di muoversi e scoprire nuovi orizzonti.',
         examples: ['National Geographic', 'Patagonia', 'The North Face'],
+        palette: [
+          { hex: '#2E7D32', name: 'Verde foresta' },
+          { hex: '#6D4C41', name: 'Terra' },
+          { hex: '#1565C0', name: 'Cielo profondo' },
+          { hex: '#F9A825', name: 'Ambra' },
+          { hex: '#ECEFF1', name: 'Neve' },
+        ],
       },
       'Eroe': {
         category: 'CAMBIAMENTO',
@@ -659,6 +753,13 @@
         goals: ['Sfidare la realtà circostante', 'Ispirare il prossimo', 'Cercare un impatto nel mondo'],
         tone: 'Tono super dinamico e motivazionale. Combatte l\'ingiustizia e porta con sé i consumatori che hanno il coraggio di rischiare. Elimina la paura di esprimere a pieno sé stessi.',
         examples: ['Nike', 'Duracell', 'Red Bull'],
+        palette: [
+          { hex: '#C62828', name: 'Rosso coraggio' },
+          { hex: '#1A1A1A', name: 'Nero potere' },
+          { hex: '#FF8F00', name: 'Arancio energia' },
+          { hex: '#37474F', name: 'Grafite' },
+          { hex: '#FF5252', name: 'Rosso vivace' },
+        ],
       },
       'Mago': {
         category: 'CAMBIAMENTO',
@@ -667,6 +768,13 @@
         goals: ['Realizzare i sogni', 'Offrire tecnologie che facilitano la vita', 'Rivoluzionare il mondo circostante'],
         tone: 'Trasforma i sogni in realtà e rende possibile l\'impossibile. Spesso parla al condizionale oppure racconta storie di trasformazione. Il futuro è adesso.',
         examples: ['Dyson', 'Mastercard', 'Disney+'],
+        palette: [
+          { hex: '#4527A0', name: 'Viola magia' },
+          { hex: '#0D47A1', name: 'Blu elettrico' },
+          { hex: '#BFA14A', name: 'Oro alchemico' },
+          { hex: '#12122A', name: 'Notte profonda' },
+          { hex: '#00E5FF', name: 'Ciano' },
+        ],
       },
       'Ribelle': {
         category: 'CAMBIAMENTO',
@@ -675,6 +783,13 @@
         goals: ['Rivoluzionare quello che non funziona', 'Difendere i valori minacciati'],
         tone: 'Si rivolge a un pubblico outsider che non ama stare alle regole. Comunicazione forte, a tratti aggressiva. Non ha paura di usare un linguaggio provocatorio perché conosce il suo pubblico.',
         examples: ['Harley-Davidson', 'Diesel', 'Tesla'],
+        palette: [
+          { hex: '#1A1A1A', name: 'Nero assoluto' },
+          { hex: '#CC0000', name: 'Rosso rivolta' },
+          { hex: '#FF6600', name: 'Arancio fuoco' },
+          { hex: '#5C5C5C', name: 'Acciaio' },
+          { hex: '#F0F0F0', name: 'Bianco grezzo' },
+        ],
       },
       'Amante': {
         category: 'APPARTENENZA',
@@ -683,6 +798,13 @@
         goals: ['Creare relazioni intime', 'Supportare il romanticismo e l\'estetica', 'Mettere al centro il bello'],
         tone: 'Seduce il consumatore con le parole giuste, convincendolo che il brand sia esattamente ciò che fa per lui. Grande motivatore: usa le parole per far sentire le persone più belle e desiderate.',
         examples: ['Dior', 'Ferrero Rocher', 'Müller'],
+        palette: [
+          { hex: '#7B003C', name: 'Rosso scuro' },
+          { hex: '#C0392B', name: 'Rosso passione' },
+          { hex: '#D4AF37', name: 'Oro seduzione' },
+          { hex: '#FFC2D4', name: 'Rosa cipria' },
+          { hex: '#1A1A1A', name: 'Nero elegante' },
+        ],
       },
       'Burlone': {
         category: 'APPARTENENZA',
@@ -691,6 +813,13 @@
         goals: ['Creare leggerezza e un senso di appartenenza', 'Far vedere il mondo in modo divertente'],
         tone: 'Linguaggio e tono giocherellone, divertente e simpatico. Vuole che anche i propri clienti si godano la vita così come fa il brand. La risata è il miglior punto di contatto.',
         examples: ["McDonald's", 'M&Ms', 'Fanta'],
+        palette: [
+          { hex: '#FFD600', name: 'Giallo solare' },
+          { hex: '#FF4081', name: 'Rosa vivace' },
+          { hex: '#00BFA5', name: 'Verde acqua' },
+          { hex: '#FF6D00', name: 'Arancio' },
+          { hex: '#212121', name: 'Nero scuro' },
+        ],
       },
       'Uomo Comune': {
         category: 'APPARTENENZA',
@@ -699,6 +828,13 @@
         goals: ['Creare un senso di appartenenza e di gruppo', 'Permettere a tutti di accedere ai propri prodotti'],
         tone: 'Comunicazione trasparente, semplice e convenzionale. Elimina qualsiasi gap tra brand e persone. Le persone si identificano nel suo modo di comunicare, fare, vivere e vedere le cose.',
         examples: ['IKEA', 'Fiat', "McDonald's"],
+        palette: [
+          { hex: '#5D4037', name: 'Bruno caldo' },
+          { hex: '#607D8B', name: 'Grigio ardesia' },
+          { hex: '#81C784', name: 'Verde salvia' },
+          { hex: '#FFCC80', name: 'Pesca' },
+          { hex: '#F5F5F5', name: 'Grigio chiaro' },
+        ],
       },
     };
 
@@ -1009,6 +1145,14 @@
 
       document.getElementById('js-r-examples').innerHTML =
         data.examples.map(e => `<span class="example-chip">${e}</span>`).join('');
+
+      document.getElementById('js-r-palette').innerHTML =
+        data.palette.map(c => `
+          <div class="swatch">
+            <div class="swatch-color" style="background:${c.hex}"></div>
+            <span class="swatch-hex">${c.hex}</span>
+            <span class="swatch-name">${c.name}</span>
+          </div>`).join('');
 
       const runnerUpWrap = document.getElementById('js-runnerup-wrap');
       if (second) {
