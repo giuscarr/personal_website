@@ -220,7 +220,7 @@ section { padding: 6rem 0; }
   color: var(--muted);
   line-height: 1.8;
   margin-bottom: 2.5rem;
-  max-width: 520px;
+  max-width: 640px;
 }
 
 .hero-cta {
@@ -808,7 +808,7 @@ footer {
   transition: transform 0.3s var(--ease-spring), border-color var(--tr),
               color var(--tr);
 }
-.hero-chips span:hover {
+.hero-chips span:not(.chip-div):hover {
   transform: translateY(-3px);
   border-color: var(--accent);
   color: var(--text);
@@ -991,4 +991,35 @@ footer {
   .timeline::before { transform: scaleY(1) !important; }
   .section-title .accent { opacity: 1 !important; transform: none !important; }
   .section-title::after { transform: scaleX(1) !important; }
+}
+
+/* ========================================
+   HERO CHIPS: gruppi tematici
+   ======================================== */
+.hero-chips {
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  max-width: 700px;
+}
+
+.chip-group {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.chip-div {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .chip-div { display: none; }
+  .hero-chips { gap: 0.6rem; }
 }
