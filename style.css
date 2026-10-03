@@ -707,3 +707,288 @@ footer {
   #hero h1 { font-size: 2.8rem; }
   .cert-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ========================================
+   MOTION DESIGN
+   ======================================== */
+:root {
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Barra di progresso scroll --- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 300;
+  pointer-events: none;
+}
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-h));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* --- Navbar: si nasconde scorrendo in basso, riappare in alto --- */
+#navbar {
+  transition: background var(--tr), box-shadow var(--tr),
+              transform 0.45s var(--ease-out);
+}
+#navbar.nav-hidden { transform: translateY(-105%); }
+
+.nav-logo {
+  transition: transform 0.35s var(--ease-spring), box-shadow var(--tr);
+}
+.nav-logo:hover {
+  transform: rotate(-8deg) scale(1.08);
+  box-shadow: 0 6px 18px rgba(230, 57, 70, 0.4);
+}
+
+/* --- Nav links: underline animato + sezione attiva --- */
+.nav-links a:not(.nav-cta) {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-out);
+}
+.nav-links a:not(.nav-cta):hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--text); }
+
+.nav-links .nav-cta {
+  transition: background var(--tr), color var(--tr),
+              transform 0.3s var(--ease-spring);
+}
+.nav-links .nav-cta:hover { transform: translateY(-2px); }
+
+/* --- Menu mobile: voci a cascata --- */
+.mobile-menu li {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.mobile-menu.open li {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc(0.12s + var(--i, 0) * 55ms);
+}
+.mobile-menu a {
+  display: inline-block;
+  transition: color var(--tr), transform 0.3s var(--ease-out);
+}
+.mobile-menu a:hover { transform: translateX(6px); }
+
+/* --- Hero: griglia in lento movimento --- */
+.hero-bg-grid { animation: grid-drift 24s linear infinite; }
+@keyframes grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 60px 60px, 60px 60px; }
+}
+
+.badge { animation: badge-glow 3.5s ease-in-out infinite; }
+@keyframes badge-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.25); }
+  50%      { box-shadow: 0 0 0 7px rgba(230, 57, 70, 0); }
+}
+
+.hero-chips span {
+  transition: transform 0.3s var(--ease-spring), border-color var(--tr),
+              color var(--tr);
+}
+.hero-chips span:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.hero-scroll { animation: scroll-bob 2.6s ease-in-out infinite; }
+@keyframes scroll-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(10px); }
+}
+
+/* --- Titoli di sezione: marker che entra, riga che si disegna --- */
+.section-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.7rem;
+}
+.section-title .accent {
+  display: inline-block;
+  transform: translateX(-10px);
+  opacity: 0;
+  transition: transform 0.5s var(--ease-spring) 0.15s, opacity 0.4s ease 0.15s;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s var(--ease-out) 0.1s;
+}
+.section-title.visible .accent { transform: translateX(0); opacity: 1; }
+.section-title.visible::after { transform: scaleX(1); }
+
+/* --- Card: sollevamento elastico + alone che segue il puntatore --- */
+.skill-card, .portfolio-card, .cert-card, .contact-card, .stat-card, .tl-card {
+  isolation: isolate;
+  position: relative;
+  transition: transform 0.4s var(--ease-out), border-color var(--tr),
+              box-shadow 0.4s var(--ease-out);
+}
+.skill-card:hover { transform: translateY(-6px); }
+.stat-card:hover  { transform: translateY(-4px); }
+
+.skill-card::before, .portfolio-card::before,
+.cert-card::before, .contact-card:not(.no-link)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(230, 57, 70, 0.14),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.skill-card:hover::before, .portfolio-card:hover::before,
+.cert-card:hover::before, .contact-card:not(.no-link):hover::before {
+  opacity: 1;
+}
+
+.tags span {
+  transition: transform 0.25s var(--ease-spring), border-color var(--tr),
+              color var(--tr), background var(--tr);
+}
+.tags span:hover {
+  transform: translateY(-2px);
+  background: rgba(230, 57, 70, 0.1);
+}
+
+.cert-icon { transition: transform 0.45s var(--ease-spring); }
+.cert-card:hover .cert-icon { transform: translateY(-4px) scale(1.12); }
+
+.contact-icon { transition: transform 0.4s var(--ease-spring); }
+.contact-card:not(.no-link):hover .contact-icon { transform: scale(1.14); }
+
+/* --- Portfolio: freccia che scorre --- */
+.portfolio-cta .arrow {
+  display: inline-block;
+  transition: transform 0.35s var(--ease-out);
+}
+.portfolio-card:hover .portfolio-cta .arrow { transform: translateX(6px); }
+
+/* --- Bottoni: riflesso che attraversa --- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: background var(--tr), border-color var(--tr), color var(--tr),
+              transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-out);
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(
+    100deg, transparent, rgba(255, 255, 255, 0.22), transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.btn:hover::after { animation: btn-shine 0.75s var(--ease-out); }
+@keyframes btn-shine {
+  to { left: 160%; }
+}
+.btn:active { transform: translateY(0) scale(0.97); }
+
+/* --- Timeline: linea che si disegna, dot che compaiono --- */
+.timeline::before {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1.2s var(--ease-out);
+}
+.timeline.drawn::before { transform: scaleY(1); }
+
+.tl-dot {
+  transform: scale(0);
+  transition: transform 0.5s var(--ease-spring) 0.25s;
+}
+.tl-item.visible .tl-dot { transform: scale(1); }
+
+#experience .tl-item:first-child .tl-dot::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  animation: dot-ping 2.2s var(--ease-out) infinite;
+}
+@keyframes dot-ping {
+  0%        { transform: scale(1);   opacity: 0.8; }
+  70%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+.tl-card:hover { transform: translateX(4px); }
+.tl-list li::before { transition: transform 0.25s var(--ease-out); }
+.tl-card:hover .tl-list li::before { transform: translateX(3px); }
+
+/* --- Reveal: varianti + stagger --- */
+.reveal {
+  transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out),
+              filter 0.65s var(--ease-out);
+  transition-delay: var(--d, 0ms);
+  will-change: opacity, transform;
+}
+.reveal-left  { transform: translateX(-28px); }
+.reveal-right { transform: translateX(28px); }
+.reveal-scale { transform: scale(0.94); }
+.reveal-blur  { filter: blur(6px); }
+.reveal.visible {
+  transform: none;
+  filter: none;
+  will-change: auto;
+}
+
+/* --- Accessibilita: rispetta le preferenze di sistema --- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .mobile-menu li { opacity: 1 !important; transform: none !important; }
+  .tl-dot { transform: scale(1) !important; }
+  .timeline::before { transform: scaleY(1) !important; }
+  .section-title .accent { opacity: 1 !important; transform: none !important; }
+  .section-title::after { transform: scaleX(1) !important; }
+}
